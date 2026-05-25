@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crowd Management Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/m.css') }}">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+
+<body>
+
+    <div class="top-header">
+        <h2>AI Based Crowd Management System</h2>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- MAIN GRID (3 COLUMN, 2 ROW) -->
+    <div class="main-grid">
+
+        <!-- Row 1 -->
+        <div class="box camera-box">
+            <h3>Live Camera</h3>
+            <img src="{{ url_for('video_feed') }}" class="live-img">
+        </div>
+
+        <div class="box heatmap-box">
+            <h3>Live Heatmap</h3>
+            <img src="{{ url_for('heatmap_feed') }}" class="live-img">
+        </div>
+
+        <!-- Analytics Box -->
+        <div class="box analytics-box">
+            <h3>Analytics</h3>
+
+            <div class="analytics-card">
+                <p>Total Person Count</p>
+                <h1 id="num">0</h1>
+            </div>
+
+            <div id="riskBox" class="risk safe">SAFE</div>
+
+            <div id="alert" class="alert hidden">
+                ⚠️ HIGH DENSITY ALERT
+            </div>
+
+            <!-- Stop Alarm Button -->
+           <button id="stopAlarmBtn" class="stop-btn hidden">🔇 Stop Alarm</button>
+
+            <!-- Alarm Sound -->
+            <audio id="alarmSound" loop>
+                <source src="{{ url_for('static', filename='mixkit-emergency-alert-alarm-1007.wav') }}" type="audio/wav">
+            </audio>
+
+           
+        </div>
+
+        <!-- Row 2 -->
+        <div class="box">
+            <h3>Pie Chart</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+
+        <div class="box">
+            <h3>Bar Chart (Male/Female)</h3>
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="box">
+            <h3>Area Chart</h3>
+            <canvas id="areaChart"></canvas>
+        </div>
+
+    </div>
+
+</body>
+</html>
